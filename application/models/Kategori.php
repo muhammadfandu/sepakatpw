@@ -59,5 +59,10 @@ Class Kategori extends CI_Model{
     $this->db->where($where);
     $this->db->update('kategori',$data);
   }
+   function delete_row($id)
+  {
+  $this->db->where('id_kategori', $id);
+  $this->db->delete('kategori'); 
+  }
 }
 ?>

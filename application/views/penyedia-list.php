@@ -60,7 +60,7 @@
 </div></div>
 
 <div class="container-fluid section1" style="padding-top:80px;">
-    <center><h1><?php echo $kategori[0]['kategori']?></h1></center>
+    <!-- <center><h1><?php echo $kategori['kategori']?></h1></center> -->
     <hr>
   <div class="container">
     <?php

@@ -20,7 +20,7 @@ Class Penyedia extends CI_Controller{
 		$this->load->model('Model_kategori');
 		$data['penyedia'] 	= $this->Model_bahan_baku->get_pen_single($_SESSION['id_user']);
 		$data['provinsi']   = $this->Model_provinsi->select_data();
-		$data['kategori']   = $this->Model_kategori->select_data();
+		$data['kategor']   = $this->Model_kategori->select_data();
 
 	  /*echo '<pre>';
       print_r($data);

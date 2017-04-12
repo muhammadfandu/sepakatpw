@@ -386,5 +386,10 @@
       print_r($_SESSION);
       echo "</pre>";
   }
+   public function tombol()
+  {
+    $this->tipe();
+  }
+    
 }
 ?>

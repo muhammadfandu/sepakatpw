@@ -6,11 +6,11 @@ Class Model_kategori extends CI_Model {
 	}
 
 	function select_data(){
-		$kategori= $this->db
+		$query = $this->db
 		->select('*')
 		->from('kategori')
 		->get();
-		return $kategori->result_array();
+		return $query->result_array();
 	}
 
 	function get_by_id($id){

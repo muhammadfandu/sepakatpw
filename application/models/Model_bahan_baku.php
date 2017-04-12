@@ -41,6 +41,11 @@ var $table = 'bahan_baku';
     return $query->result_array();
   }
 
+  function get_pens_single(){
+    $query = $this->db->get('bahan_baku');
+    return $query->result_array();
+  }
+
   function get_name_ker_man($id){
     $query = $this->db
       ->select('*')
@@ -90,30 +95,25 @@ var $table = 'bahan_baku';
     return $query->result_array();
   }
 
-	function get_bahan($id){
+	function get_bahan(){
+    $query = $this->db->get('bahan_baku');
+    return $query->result_array();
+  }
 
-    // $query = $this->db->get('bahan_baku');
-    // return $query->result_array();
+	function select_data()
+ {
+    $query= $this->db->query('SELECT * FROM  `bahan_baku` 
+    WHERE nama IS NOT NULL and alamat IS NOT NULL and no_telp IS NOT NULL and email IS NOT NULL and total_produksi IS NOT NULL and kategori IS NOT NULL and barang_bahan IS NOT NULL and provinsi IS NOT NULL and kota IS NOT NULL');
+    return $query->result_array();
+ }
+public function get_by_id($id)
+  {
+    $this->db->from($this->table);
+    $this->db->where('id_bahan_baku',$id);
+    $query = $this->db->get();
 
-		$query = $this->db
-             ->select('*')
-             ->from('bahan_baku')
-             ->where('kategori', $id)
-			 ->where('no_telp IS NOT NULL', NULL, FALSE)
-             ->get();
-		return $query->result_array();
-	}
-
-	function select_data(){
-		$bahan_baku = $this->db
-		->select('id_bahan_baku, nama, alamat, no_telp, email, bukti, total_produksi, kategori.kategori, barang_bahan, bahan_baku.provinsi, kota.kota, id_user')
-		->from('bahan_baku')
-		->join('kategori', 'kategori.kategori = bahan_baku.kategori')
-		->join('kota', 'kota.kota = bahan_baku.kota')
-		->get();
-		return $bahan_baku->result_array();
-	}
-
+    return $query->row();
+  }
 	function tambah_bahan_baku($data){
 		$this->db->insert('bahan_baku', $data);
 	}
@@ -160,19 +160,19 @@ var $table = 'bahan_baku';
         return $query->result_array();
       }elseif($ban >=1000 AND $ban <3000)
       {
-        $this->db->where('total_produksi <3000 and total_produksi >=1000');
+        $this->db->where('total_produksi < 3000 and total_produksi >=1000');
         $query = $this->db->get('bahan_baku');
         return $query->result_array();
       }
       elseif($ban >=500 AND $ban <1000)
       {
-        $this->db->where('total_produksi <1000 and total_produksi >=500');
+        $this->db->where('total_produksi < 1000 and total_produksi >=500');
         $query = $this->db->get('bahan_baku');
         return $query->result_array();
       }
       elseif($ban <500)
       {
-        $this->db->where('total_produksi <500');
+        $this->db->where('total_produksi < 500');
         $query = $this->db->get('bahan_baku');
         return $query->result_array();
       }
@@ -240,6 +240,16 @@ function tambahbahan($data1){
                ->set($data)
                ->update($table);
     }
+    function update_bahan($where,$data){
+    $this->db->where($where);
+    $this->db->update('bahan_baku',$data);
+  }
+
+  public function kategori()
+  {
+   $query = $this->db->get('kategori');
+    return $query->result_array();
+  }
 }
 
 ?>

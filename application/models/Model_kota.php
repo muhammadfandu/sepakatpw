@@ -5,6 +5,7 @@ Class Model_kota extends CI_Model {
 		$this->load->database();
 	}
 
+var $table = 'kota';
 	function select_data(){
 		$kota = $this->db
 		->select('id_kota, provinsi, kota')
@@ -20,6 +21,18 @@ Class Model_kota extends CI_Model {
 				 ->get();
 		return $search->row_array();
 	}
+	function update_kota($where,$data){
+    $this->db->where($where);
+    $this->db->update('kota',$data);
+  }
+public function get_by_id($id)
+  {
+    $this->db->from($this->table);
+    $this->db->where('id_kota',$id);
+    $query = $this->db->get();
+
+    return $query->row();
+  }
 
 	function tambah_kota($data){
 		$this->db->insert('kota', $data);
@@ -33,11 +46,15 @@ Class Model_kota extends CI_Model {
 	function edit_kota($where,$table){		
 	return $this->db->get_where($table,$where);
 	}
-
-	function update_kota($where,$data,$table){
-		$this->db->where($where);
-		$this->db->update($table,$data);
-	}
+function delete_row($id)
+  {
+  $this->db->where('id_kota', $id);
+  $this->db->delete('kota'); 
+  }
+	function get_pens_single(){
+    $query = $this->db->get('kota');
+    return $query->result_array();
+  }
 }
 
 ?>

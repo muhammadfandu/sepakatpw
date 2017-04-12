@@ -31,7 +31,7 @@
 
     public function tambah_kategori(){
         $data = array(
-          'kategori' => $this->input->post('kategori')
+          'kategori' => $this->input->post('kategoris')
         );
         $q = $this->kategori->selectSearch('kategori', array('kategori' => $this->input->post('kategori')));
         if($q == null){
@@ -68,7 +68,14 @@
           echo "Fail to update data";
       }
     }
-
+public function del_kat($id)
+   {
+   
+      $this->load->model('Kategori');
+      
+    $this->Kategori->delete_row($id);
+    redirect('admin/kategori');
+   }
     public function delete_kategori($id){
       $this->load->model('kategori');
 
@@ -81,16 +88,17 @@
       $this->load->library('form_validation');
       $this->load->model('model_barang_bahan');
 
+      $data['kategori'] = $this->model_barang_bahan->kategori();
       $data['barang_bahan'] = $this->model_barang_bahan->select_data();
       $this->load->view('admin-header');
       $this->load->view('admin-barang-bahan', $data);
       $this->load->view('admin-footer');
     }
-function insert_barang()
+    function insert_barang()
    {
    $this->load->model('model_barang_bahan');
-   $nama =  $this->input->post('nama');
-   $kategori =  $this->input->post('kategori');
+   $nama =  $this->input->post('namas');
+   $kategori =  $this->input->post('kategoris');
   
    if($this->input->post('submit')){
      $data = array(
@@ -103,7 +111,7 @@ function insert_barang()
    redirect('Admin/barang_bahan');
    }
   }
-   public function del_bar($id)
+  public function del_bar($id)
    {
    
       $this->load->model('model_barang_bahan');
@@ -111,7 +119,7 @@ function insert_barang()
     $this->model_barang_bahan->delete_row($id);
     redirect('admin/barang_bahan');
    }
-   public function barang_edit($id){
+public function barang_edit($id){
       $this->load->model('model_barang_bahan');
       $data = $this->model_barang_bahan->get_by_id($id);
       // echo "<pre>";
@@ -137,7 +145,7 @@ public function update_bar(){
       $this->load->view('admin-provinsi', $data);
       $this->load->view('admin-footer');
     }
-function insert_prov()
+    function insert_prov()
    {
    $this->load->model('model_provinsi');
    $nama =  $this->input->post('namas');
@@ -173,7 +181,8 @@ function insert_prov()
     public function kota(){
       $this->load->library('form_validation');
       $this->load->model('model_kota');
-
+      $data['penyedia']   = $this->model_kota->get_pens_single();
+      $data['provinsi']   = $this->Model_provinsi->select_data();
       $data['kota'] = $this->model_kota->select_data();
       $this->load->view('admin-header');
       $this->load->view('admin-kota', $data);
@@ -208,6 +217,7 @@ function insert_kota()
       }
     }
 
+
   public function kota_edit($id){
       $this->load->model('model_kota');
       $data = $this->model_kota->get_by_id($id);
@@ -224,7 +234,14 @@ function insert_kota()
       $this->model_kota->update_kota($where, $data);
         echo "Data has been updated";
     }
-public function del_kota($id)
+
+    public function delete_user($id){
+      $this->load->model('model_user');
+
+      $this->model_user->delete_by_id($id);
+      echo json_encode(array("status" => TRUE));
+    }
+  public function del_kota($id)
    {
    
       $this->load->model('model_kota');
@@ -234,12 +251,12 @@ public function del_kota($id)
    }
     //User
     public function user(){
-			$data['user'] = $this->model_user->select_data();
-			$this->load->view('admin-header');
-			$this->load->view('admin-user', $data);
-     	$this->load->view('admin-footer');
-		}
-public function user_edit($id){
+      $data['user'] = $this->model_user->select_data();
+      $this->load->view('admin-header');
+      $this->load->view('admin-user', $data);
+      $this->load->view('admin-footer');
+    }
+    public function user_edit($id){
       $this->load->model('model_user');
       $data = $this->model_user->get_by_id($id);
       // echo "<pre>";
@@ -268,7 +285,7 @@ public function del_user($id)
 function insert_user()
    {
    $this->load->model('model_user');
-   $username =  $this->input->post('usernames');
+   $username =  $this->input->post('username');
    $pass =  $this->input->post('passwords');
    $perus =  $this->input->post('peruss');
   
@@ -285,14 +302,21 @@ function insert_user()
    redirect('Admin/user');
    }
   }
+
     //Manufaktor
     public function manufaktur(){
-  		$data['manufaktur'] = $this->model_manufaktur->select_data();
-  	  $this->load->view('admin-header');
-  	  $this->load->view('admin-manufaktur', $data);
-  	  $this->load->view('admin-footer');
+        $this->load->library('form_validation');
+      $this->load->model('model_manufaktur');
+      $data['manufaktur'] = $this->model_manufaktur->select_data();     
+      $data['perusahaan']   = $this->model_manufaktur->get_pens_single();
+    $data['provinsi']   = $this->Model_provinsi->select_data();
+      $data['kategori'] = $this->model_manufaktur->kategori();
+      $data['bahan'] = $this->model_manufaktur->select_data();
+      $this->load->view('admin-header');
+      $this->load->view('admin-manufaktur', $data);
+      $this->load->view('admin-footer');
     }
-function insert_manu()
+    function insert_manu()
    {
    $this->load->model('model_manufaktur');
            $nama =  $this->input->post('namas');
@@ -358,13 +382,15 @@ public function del_manu($id)
     }
     //Bahan Baku
     public function bahan_baku(){
-  		$this->load->library('form_validation');
-  		$this->load->model('model_bahan_baku');
-
-  		$data['bahan_baku'] = $this->model_bahan_baku->select_data();
-  	    $this->load->view('admin-header');
-  	    $this->load->view('admin-bahan-baku', $data);
-  	    $this->load->view('admin-footer');
+      $this->load->library('form_validation');
+      $this->load->model('model_bahan_baku');
+      $data['penyedia']   = $this->model_bahan_baku->get_pens_single();
+    $data['provinsi']   = $this->Model_provinsi->select_data();
+      $data['kategori'] = $this->model_bahan_baku->kategori();
+      $data['bahan'] = $this->model_bahan_baku->select_data();
+        $this->load->view('admin-header');
+        $this->load->view('admin-bahan-baku', $data);
+        $this->load->view('admin-footer');
       }
       function insert_bahan()
    {
@@ -423,7 +449,8 @@ public function update_bahan(){
       echo json_encode($data);
     }
 
-    //Postingan
+   
+//Postingan
     public function posting(){
       $this->load->library('form_validation');
       $this->load->model('model_postingan');
@@ -433,5 +460,31 @@ public function update_bahan(){
         $this->load->view('admin-posting', $data);
         $this->load->view('admin-footer');
       }
+       public function post_edit($id){
+      $this->load->model('model_postingan');
+      $data = $this->model_postingan->get_by_id($id);
+      // echo "<pre>";
+      // print_r($data);
+      // echo "</pre>";
+      echo json_encode($data);
+    }
+
+
+// public function update_bahan(){
+//       $data   = array('username' => $this->input->post('user'),
+//         'password'=>$this->input->post('password'));
+//       $where  = array('id_user' => $this->input->post('iduser'));
+
+//       $this->model_user->update_user($where, $data);
+//         echo "Data has been updated";
+//     }
+
+    // public function delete_user($id){
+    //   $this->load->model('model_user');
+
+    //   $this->model_user->delete_by_id($id);
+    //   echo json_encode(array("status" => TRUE));
+    // }
+
   }
 ?>

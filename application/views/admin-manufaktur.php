@@ -16,9 +16,9 @@
             <td>Alamat</td>
             <td>No Telepon</td>
             <td>Email</td>
-            <td>Bukti</td>
-            <td>Kategori</td>
+            <td>Tipe</td>
             <td>Barang yang dibutuhkan</td>
+            <td>Banyak barang</td>
             <td>Provinsi</td>
             <td>Kota</td>
             <td width="15%"></td>
@@ -29,17 +29,18 @@
         $no++;
       ?>
         <tr>
+        <input type="hidden" name="idmanu" id="idmanu" class="form-control" value="<?php echo $manufaktur[$no-1]['id_manufaktur']; ?>" />
             <td><?php echo $no; ?></td>
             <td><?php echo $manufaktur[$no-1]['nama']; ?></td>
             <td><?php echo $manufaktur[$no-1]['alamat']; ?></td>
             <td><?php echo $manufaktur[$no-1]['no_telp']; ?></td>
             <td><?php echo $manufaktur[$no-1]['email']; ?></td>
-            <td><?php echo $manufaktur[$no-1]['bukti']; ?></td>
-            <td><?php echo $manufaktur[$no-1]['kategori']; ?></td>
+            <td><?php echo $manufaktur[$no-1]['tipe']; ?></td>
             <td><?php echo $manufaktur[$no-1]['barang_dibutuhkan']; ?></td>
+            <td><?php echo $manufaktur[$no-1]['banyak_kebutuhan']; ?></td>
             <td><?php echo $manufaktur[$no-1]['provinsi']; ?></td>
             <td><?php echo $manufaktur[$no-1]['kota']; ?></td>
-            <td><button align="center" class="btn btn-success" data-target="#ModalEdit" data-toggle="modal" type="button"><i class="fa fa-fw fa-pencil-square"></i> Edit</button> <button class="btn btn-danger" data-target="#ModalDelete" data-toggle="modal" type="button"><i class="fa fa-fw fa-trash-o"></i> Delete</button></td>
+            <td><button align="center" class="btn btn-success" data-target="#ModalEdit" data-toggle="modal" type="button" onclick="edit_manu(<?php echo $u['id_manufaktur'];?>)"><i class="fa fa-fw fa-pencil-square"></i> Edit</button> <a href="del_manu/<?php echo $manufaktur[$no-1]['id_manufaktur'];?>" onclick="return confirmDelete();"><button class="btn btn-danger" data-target="#ModalDelete" data-toggle="modal" type="button"><i class="fa fa-fw fa-trash-o"></i> Delete</button></a></td>
         </tr>
         <?php
         }
@@ -73,10 +74,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="ModalAddLabel"><i class="fa fa-fw fa-plus-circle"></i>Tambah Data Baru</h4>
       </div>
+       <form method="POST" action="<?php echo base_url(); ?>Admin/insert_manu">
       <div class="modal-body">
         <div class="form-group">
           <span>Nama :</span>
-<<<<<<< HEAD
           <input type="text" name="namas" id="namas" class="form-control" placeholder="Nama perusahaan" />
         </div>
         <div class="form-group">
@@ -85,7 +86,7 @@
         </div>
         <div class="form-group">
           <span>Nomor Telepon:</span>
-          <input type="text" name="notelps" id="notelps" class="form-control" placeholder="nomor telepon" />
+          <input type="text" name="nos" id="nos" class="form-control" placeholder="nomor telepon" />
         </div>
         <div class="form-group">
           <span>Email :</span>
@@ -109,87 +110,179 @@
           <input type="text" name="banyaks" id="banyaks" class="form-control" placeholder="Banyak Barang yang dibutuhkan" />
         </div>
         <div class="form-group">
-          <span>Provinsi :</span>
-          <input type="text" name="provinsis" id="provinsis" class="form-control" placeholder="provinsi" />
+         <span>Provinsi :</span>
+         <select class="form-control" name="provinsis" onchange="combokota()" id="provinsis">
+              <?php
+                if($perusahaan[0]['provinsi'] != NULL){
+                  echo "<option value=" . $perusahaan[0]['provinsi'] . "> ". $perusahaan[0]['provinsi'] . "</option>";
+                } else {
+                  echo "<option value=''>Provinsi</option>";
+                }
+                  foreach($provinsi as $data){ 
+                    echo "<option value=" . $data['provinsi'] . "> ". $data['provinsi'] . "</option>"; }
+               ?>
+            </select>
+          <!-- <span>Provinsi :</span>
+          <input type="text" name="provinsi" id="provinsi" class="form-control" placeholder="provinsi" /> -->
         </div>
         <div class="form-group">
           <span>Kota :</span>
-          <input type="text" name="kotas" id="kotas" class="form-control" placeholder="kota" />
-=======
-          <input type="text" name="username" id="username" class="form-control" placeholder="Username" />
-        </div>
-        <div class="form-group">
-          <span>Alamat :</span>
-          <input type="text" name="password" id="password" class="form-control" placeholder="Password" />
-        </div>
-        <div class="form-group">
-          <span>Alamat :</span>
-          <input type="text" name="password" id="password" class="form-control" placeholder="Password" />
-        </div>
-        <div class="form-group">
-          <span>Alamat :</span>
-          <input type="text" name="password" id="password" class="form-control" placeholder="Password" />
-        </div>
-        <div class="form-group">
-          <span>Alamat :</span>
-          <input type="text" name="password" id="password" class="form-control" placeholder="Password" />
-        </div>
-        <div class="form-group">
-          <span>Alamat :</span>
-          <input type="text" name="password" id="password" class="form-control" placeholder="Password" />
-        </div>
-        <div class="form-group">
-          <span>Alamat :</span>
-          <input type="text" name="password" id="password" class="form-control" placeholder="Password" />
-        </div>
-        <div class="form-group">
-          <span>Alamat :</span>
-          <input type="text" name="password" id="password" class="form-control" placeholder="Password" />
-        </div>
-        <div class="form-group">
-          <span>Alamat :</span>
-          <input type="text" name="password" id="password" class="form-control" placeholder="Password" />
->>>>>>> 175c04ed14670d7c281e5a5c6010649ddec12ee4
+          <select id="kotas" class="form-control" name="kotas" style="color:#bdc3c7;" >
+              <?php
+                if($perusahaan[0]['kota'] != NULL){
+                  echo "<option value=" . $perusahaan[0]['kota'] . "> ". $perusahaan[0]['kota'] . "</option>";
+                } else {
+                  echo "<option value=''>Kota</option>";
+                }
+              ?>
+            </select>
+          <!-- <input type="text" name="kota" id="kota" class="form-control" placeholder="kota" /> -->
         </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Batalkan</button>
-        <button type="button" class="btn btn-primary">Tambahkan Data</button>
+        <input type="submit" name="submit" class="btn bg-red waves-effect" value="Tambah">
       </div>
+      </form>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="ModalEditLabel">
+<div class="modal fade" id="ModalEdit2" tabindex="-1" role="dialog" aria-labelledby="ModalEditLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="ModalEditLabel"><i class="fa fa-fw fa-pencil-square"></i>Sunting Data</h4>
       </div>
+      <form method="POST" action="" id="edManu">
       <div class="modal-body">
         <div class="form-group">
-          <span>ID User :</span>
-          <input disabled type="text" name="iduser" id="iduser" class="form-control" placeholder="ID User" value="2" />
+          <span>ID Perusahaan :</span>
+          <input disabled type="text" name="idmanuf" id="idmanuf" class="form-control" placeholder="ID User" value="2" />
+          <input type="hidden" name="idmanu" id="idmanu">
         </div>
         <div class="form-group">
-          <span>Username :</span>
-          <input type="text" name="username" id="username" class="form-control" placeholder="Username" value="moklet"/>
+          <span>Nama :</span>
+          <input type="text" name="nama" id="nama" class="form-control" placeholder="Nama perusahaan" />
         </div>
         <div class="form-group">
-          <span>Password :</span>
-          <input type="password" name="password" id="password" class="form-control" placeholder="Password" value="fewfwe"/>
+          <span>Alamat :</span>
+          <input type="text" name="alamat" id="alamat" class="form-control" placeholder="alamat" />
+        </div>
+        <div class="form-group">
+          <span>Nomor Telepon:</span>
+          <input type="text" name="no" id="no" class="form-control" placeholder="nomor telepon" />
+        </div>
+        <div class="form-group">
+          <span>Email :</span>
+          <input type="text" name="email" id="email" class="form-control" placeholder="email" />
+        </div>
+        <div class="form-group">
+          <span>Tipe Perusahaan :</span>
+          <select name="tipe" class="form-control">
+              <option value="">Tipe Perusahaan</option>
+              <option value="Perusahaan Besar">Perusahaan Besar</option>
+              <option value="Perusahaan Sedang">Perusahaan Sedang</option>
+              <option value="Perusahaan Kecil">Perusahaan Kecil</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <span>Barang yang Dibutuhkan :</span>
+          <input type="text" name="butuh" id="butuh" class="form-control" placeholder="Barang yang dibutuhkan" />
+        </div>
+        <div class="form-group">
+          <span>Banyak Barang :</span>
+          <input type="text" name="banyak" id="banyak" class="form-control" placeholder="Banyak Barang yang dibutuhkan" />
+        </div>
+       <div class="form-group">
+         <span>Provinsi :</span>
+         <select class="form-control" name="provinsi" onchange="combokotas()" id="provinsi">
+              <?php
+                if($perusahaan[0]['provinsi'] != NULL){
+                  echo "<option value=" . $perusahaan[0]['provinsi'] . "> ". $perusahaan[0]['provinsi'] . "</option>";
+                } else {
+                  echo "<option value=''>Provinsi</option>";
+                }
+                  foreach($provinsi as $data){ 
+                    echo "<option value=" . $data['provinsi'] . "> ". $data['provinsi'] . "</option>"; }
+               ?>
+            </select>
+          <!-- <span>Provinsi :</span>
+          <input type="text" name="provinsi" id="provinsi" class="form-control" placeholder="provinsi" /> -->
+        </div>
+        <div class="form-group">
+          <span>Kota :</span>
+          <select id="kota" class="form-control" name="kota" style="color:#bdc3c7;" >
+              <?php
+                if($perusahaan[0]['kota'] != NULL){
+                  echo "<option value=" . $perusahaan[0]['kota'] . "> ". $perusahaan[0]['kota'] . "</option>";
+                } else {
+                  echo "<option value=''>Kota</option>";
+                }
+              ?>
+            </select>
+          <!-- <input type="text" name="kota" id="kota" class="form-control" placeholder="kota" /> -->
         </div>
       </div>
+      </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Batalkan</button>
-        <button type="button" class="btn btn-primary">Simpan Perubahan</button>
+        <button type="button" onclick="savemanu()" class="btn btn-primary">Simpan Perubahan</button>
       </div>
     </div>
   </div>
 </div>
-
+<script type="text/javascript">
+    function confirmDelete() {
+        return confirm('Are you sure you want to delete this data?');
+    }
+</script>
+<script type="text/javascript">
+function combobarang()
+  {
+    var combo_kategori = $('#kategoris').val();
+    //console.log(combo_kategori);
+    $.ajax({
+      type: "POST",
+      url: "<?php echo base_url('Admin/getComboBahan/') ?>"+combo_kategori,
+      data : '',
+      success: function(data){
+        $('#barangs').find('option').remove();
+        $('#barangs').append(data);
+      }
+    });
+  }
+  function combokota() 
+  {
+    var combo_provinsi = $('#provinsis').val();
+    console.log(combo_provinsi);
+    $.ajax({
+      type: "POST",
+      url: "<?php echo base_url('Admin/getComboKota/') ?>"+combo_provinsi,
+      data : '',
+      success: function(data){
+        $('#kotas').find('option').remove();
+        $('#kotas').append(data);
+      }
+    });
+  }
+  function combokotas() 
+  {
+    var combo_provinsi = $('#provinsi').val();
+    console.log(combo_provinsi);
+    $.ajax({
+      type: "POST",
+      url: "<?php echo base_url('Admin/getComboKota/') ?>"+combo_provinsi,
+      data : '',
+      success: function(data){
+        $('#kota').find('option').remove();
+        $('#kota').append(data);
+      }
+    });
+  }
+  </script>
 <!-- <div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="ModalDeleteLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

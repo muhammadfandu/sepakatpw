@@ -24,7 +24,7 @@
       <td><?php echo $i; $i++; ?></td>
       <td><?php echo $data->id_kategori?></td>
       <td><?php echo $data->kategori?></td>
-      <td><button class="btn btn-success"  type="button" onclick="edit_kategori(<?php echo $data->id_kategori;?>)"><i class="fa fa-fw fa-pencil-square"></i> Edit</button> <button class="btn btn-danger" data-target="#ModalDelete" data-toggle="modal" type="button" onclick="delete_kategori(<?php echo $data->id_kategori;?>)"><i class="fa fa-fw fa-trash-o"></i> Delete</button></td>
+      <td><button class="btn btn-success"  type="button" onclick="edit_kategori(<?php echo $data->id_kategori;?>)"><i class="fa fa-fw fa-pencil-square"></i> Edit</button><a href="del_kat/<?php echo $data->id_kategori; ?>" onclick="return confirmDelete();"><button class="btn btn-danger" data-target="#ModalDelete" data-toggle="modal" type="button"><i class="fa fa-fw fa-trash-o"></i> Delete</button></a></td>
     </tr>
     <?php    } ?>
   </table>
@@ -65,7 +65,7 @@
       <div class="modal-body">
         <div class="form-group">
           <span>Kategori :</span>
-          <input type="text" name="kategori" id="kategori" class="form-control" placeholder="Kategori" />
+          <input type="text" name="kategoris" id="kategoris" class="form-control" placeholder="Kategori" />
         </div>
       </div>
       <div class="modal-footer">
@@ -104,7 +104,11 @@
     </div>
   </div>
 </div>
-
+<script type="text/javascript">
+    function confirmDelete() {
+        return confirm('Are you sure you want to delete this data?');
+    }
+</script>
 <!-- <div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="ModalDeleteLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
