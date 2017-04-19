@@ -29,8 +29,8 @@
   }*/
 ?>
 
-<div class="sub-banner" >
-  <div class="container" style="background-image: url('<?= $gamlat;?>'); padding-top:10%; color:white;">
+<div class="sub-banner" <?php if($a['gambar_latar']!=null) { ?>style="background-image:url('<?php echo base_url($a['gambar_latar'])?>')"<?php } ?> >
+  <div class="container" style="padding-top:10%; color:white;">
   </div>
   <div class="container filter-box" style="text-align:left; font-size:120%; line-height:2;">
     <div class="row company-itemhead">
@@ -42,12 +42,12 @@
         <span style="color:#b0b0b0;"><?= $a['kategori'];?></span>&nbsp;<span class="label-primary"> Menghasilkan: <?= $a['barang_bahan'];?></span>
       </div>
       <div class="col-md-2 text-center">
-        <span>2 jam yang lalu</span>
+        <!-- <span>2 jam yang lalu</span> -->
       </div>
     </div>
     <div class="row company-itembody">
       <div class="col-md-12" align="justify">
-        <?= $a['deskripsi'];?>
+        <?= substr($a['deskripsi'],0,400);?>...
       </div>
     </div>
     <div class="row company-itemfoot" style="background-color:white;font-size:80%;">
@@ -130,24 +130,7 @@
 </div>
 
 <div class="container-fluid" style="background-color:white;margin-top:60px;">
-  <!--<div class="container" style="text-align:justify;">
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-    <h4>Our Key Values</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-    <h4>What We Need</h4>
-    <ul>
-      <li>Lorem ipsum dolor sit amet</li>
-      <li>Ut enim ad minim veniam</li>
-      <li>Excepteur sint occaecat cupidatat</li>
-      <li>Consectetur adipisicing elit</li>
-      <li>Lorem ipsum dolor sit amet</li>
-    </ul>
-    <p>
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    </p>
-  </div>-->
+  <div class="container" style="text-align:justify;">
+      <p><?= $a['deskripsi'];?></p>
+  </div>
 </div>

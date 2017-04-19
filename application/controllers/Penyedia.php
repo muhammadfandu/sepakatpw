@@ -315,7 +315,7 @@ Class Penyedia extends CI_Controller{
 
 	public function list_kategori(){
 		$this->load->model('model_bahan_baku');
-		$data['kategori'] = $this->model_bahan_baku->select_data_kat();
+		$data['kategori'] = $this->model_bahan_baku->select_data_kat_home();
 
 		$this->load->view('header');
 		$this->load->view('penyedia-kategori', $data);

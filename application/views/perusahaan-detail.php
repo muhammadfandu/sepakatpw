@@ -30,7 +30,7 @@
   }*/
 
 ?>
-<div class="sub-banner" >
+<div class="sub-banner" <?php if($query[0]['gambar_latar']!=null) { ?>style="background-image:url('<?php echo base_url($query[0]['gambar_latar'])?>')"<?php } ?> >
   <div class="container" style="padding-top:10%;color:white;">
   </div>
   <div class="container filter-box" style="text-align:left;font-size:120%;line-height:2;">
@@ -48,7 +48,7 @@
     </div>
     <div class="row company-itembody">
       <div class="col-md-12">
-        <?= $query[0]['deskripsi'];?>
+        <?= substr($query[0]['deskripsi'],0,400);?>...
       </div>
     </div>
     <div class="row company-itemfoot" style="background-color:white;font-size:80%;">
@@ -76,10 +76,10 @@
     <div class="row company-action">
       <div class="col-md-8 pull-left">
         <h4 style="margin-top:20px;">Bagikan di
-          <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span>
-          <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span>
-          <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></span>
-          <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x fa-inverse"></i></span>
+            <a href="https://www.facebook.com/"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a>
+            <a href="http://twitter.com/"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a>
+            <a href="https://plus.google.com/"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></span></a>
+            <a href="http://linkedin.com/"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x fa-inverse"></i></span></a>
         </h4>
       </div>
 
@@ -142,6 +142,6 @@
 
 <div class="container-fluid" style="background-color:white;margin-top:60px;">
   <div class="container" style="text-align:justify;">
-
+      <p><?php echo $query[0]['deskripsi'];?></p>
   </div>
 </div>

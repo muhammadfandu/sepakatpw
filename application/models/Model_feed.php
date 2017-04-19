@@ -14,6 +14,53 @@ Class Model_feed extends CI_Model {
 		$feed->num_rows();
 	}
 
+	public function addfeed($data)
+	{
+		return $this->db->insert('postingan', $data);
+	}
+
+	function get_feed_manufaktur(){
+		$feed = $this->db
+				->select('*')
+				->from('postingan')
+				->join('user','user.id_user=postingan.id_user')
+				->join('manufaktur','user.id_user = manufaktur.id_user')
+				->get();
+		return $feed->result_array();
+	}
+
+	function get_feed_penyedia(){
+		$feed = $this->db
+				->select('*')
+				->from('postingan')
+				->join('user','user.id_user = postingan.id_user')
+				->join('bahan_baku','user.id_user = bahan_baku.id_user')
+				->get();
+		return $feed->result_array();
+	}
+
+	function manufaktur_get_by_id($id){
+		$feed = $this->db
+				->select('*')
+				->from('postingan')
+				->join('user','user.id_user=postingan.id_user')
+				->join('manufaktur','user.id_user = manufaktur.id_user')
+				->where('postingan.id_post',$id)
+				->get();
+		return $feed->result_array();
+	}
+
+	function penyedia_get_by_id($id){
+		$feed = $this->db
+				->select('*')
+				->from('postingan')
+				->join('user','user.id_user=postingan.id_user')
+				->join('bahan_baku','user.id_user = bahan_baku.id_user')
+				->where('postingan.id_post',$id)
+				->get();
+		return $feed->result_array();
+	}
+
 	function get_feed_detail($id){
 		$feed = $this->db
 				->select('*')

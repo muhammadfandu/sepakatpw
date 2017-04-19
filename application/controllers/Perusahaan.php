@@ -150,6 +150,11 @@
                 'jam_kerja'          =>$jam
              );
 
+               echo "<pre>";
+               print_r($data);
+               echo "</pre>";
+            //    die;
+
              /*echo $id ." ". $nama ." ". $alamat ." ". $provinsi ." ". $kota ." ". $notelp ." ". $email ." ". $tipe ." ". $butuh ."  ". $banyak ." ". $target_file;*/
 
              $this->Model_manufaktur->update_profil($id_user,$data);
@@ -386,10 +391,5 @@
       print_r($_SESSION);
       echo "</pre>";
   }
-   public function tombol()
-  {
-    $this->tipe();
-  }
-    
 }
 ?>
