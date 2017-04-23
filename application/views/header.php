@@ -168,7 +168,7 @@ function closeNav() {
                 echo "<li class=''><a data-toggle='modal' data-target='#ModalNotif'>Notifikasi <span class='label-primary'>".$this->session->userdata('notif_man')."</span></a></li>";
                 echo "<li class=''><a href='". base_url('index.php/Login/logout') ."'>Logout</a></li>";
             }elseif ($this->session->userdata('tipe_user') == 'Bahan Baku' && $this->session->userdata('status') == "login") {
-                echo "<li class=''><a href='". base_url('index.php/Penyedia/isidetail') ."'>Feed</a></li>";
+                echo "<li class=''><a href='". base_url('index.php/Feed/penyedia') ."'>Feed</a></li>";
                 echo "<li class=''><a href='" . base_url('index.php/Perusahaan/') . "'>Cari Perusahaan Manufaktur</a></li> ";
                 echo "<li class=''><a href='". base_url('index.php/Penyedia/profile/') ."'>Data Diri</a></li>";
                 echo "<li class=''><a data-toggle='modal' data-target='#ModalNotif'>Notifikasi <span class='label-primary'>".$this->session->userdata('notif_ban')."</span></a></li>";

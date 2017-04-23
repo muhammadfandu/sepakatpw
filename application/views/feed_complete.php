@@ -66,6 +66,36 @@
                 </div>
               </div>
             </div>
+            <div class="xol-xs-12 hub-item">
+                <div class="blog-comment">
+                     <h3 class="text-success">Comments</h3>
+                     <ul class="comments">
+                     <?php foreach ($komentar as $data) { ?>
+                        <li class="clearfix">
+                          <img src="<?php echo base_url($data['icon']); ?>" class="avatar" alt="">
+                          <div class="post-comments">
+                              <p class="meta">On <?php echo $data['time']?> <a href="#"><?php echo $data['nama']?></a> says : <i class="pull-right"></i></p>
+                              <p>
+                                  <?php echo $data['komentar']?>
+                              </p>
+                          </div>
+                        </li>
+                     <?php } ?>
+                     </ul>
+                     <div class="col-md-11 col-md-offset-1" style="padding:0px;">
+                     <h4>Tambahkan Komentar</h4>
+                     <form action="<?php echo base_url('komentar/add')?>" method="post">
+                         <div class="input-group" style="width:100%;">
+                             <!-- <div class="input-group-addon" style="width:150px;text-align:right;">Tambahkan komentar</div> -->
+                             <input type="text" class="form-control" name="komentar" placeholder="Tulis komentar di sini  ...">
+                             <input type="hidden" name="id_post" value="<?php echo $feed[0]['id_post'];?>">
+                        </div>
+                        <button type="submit" class="btn btn-default pull-right">Kirim</button>
+                     </form>
+                    </div>
+                </div>
+                <br>
+                </div>
       <?php } ?>
   </div>
 </div>

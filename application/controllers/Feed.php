@@ -127,8 +127,14 @@
         $this->load->database();
 
         $this->load->model('model_feed');
+        $this->load->model('Model_komentar');
 
         $data['feed'] = $this->model_feed->manufaktur_get_by_id($id);
+        $data['komentar'] = $this->Model_komentar->get_by_post1($id);
+
+        // echo '<pre>';
+        // print_r($data['komentar']);
+        // echo '</pre>';
 
         $this->load->view('header');
         $this->load->view('feed_complete',$data);
@@ -139,9 +145,15 @@
         $this->load->helper('url');
         $this->load->database();
 
+        $this->load->model('Model_komentar');
         $this->load->model('model_feed');
 
         $data['feed'] = $this->model_feed->penyedia_get_by_id($id);
+        $data['komentar'] = $this->Model_komentar->get_by_post2($id);
+
+        // echo '<pre>';
+        // print_r($data['komentar']);
+        // echo '</pre>';
 
         $this->load->view('header');
         $this->load->view('feed_complete',$data);
