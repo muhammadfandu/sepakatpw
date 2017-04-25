@@ -58,9 +58,9 @@
               </div>
             </a>
               <div class="row hub-foot">
-                <div class="col-xs-4">
+                <!--<div class="col-xs-4">
                   <span><i class="fa fa-fw fa-thumbs-o-up"></i> Like</span><br>
-                </div>
+                </div>-->
                 <div class="col-md-8 pull-right text-right">
                   <h5 style="margin-top:20px;">Bagikan di
                       <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url('feed/detail_perusahaan/').$data['id_post']?>" target="_blank"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a>

@@ -20,6 +20,19 @@
   <div class="container filter-box">
     <h2 style="color:#0f0f0f;margin-top:0;">Filter</h2>
 
+    <div class="row">
+      <div class="col-md-11" style="padding-left: 25px;">
+        <!--<h4>Tambahkan Komentar</h4>-->
+          <form action="<?php echo base_url('Perusahaan/cari')?>" method="post">
+                         <div class="input-group" style="width:100%;">
+                             <!-- <div class="input-group-addon" style="width:150px;text-align:right;">Tambahkan komentar</div> -->
+                             <input type="text" class="form-control" name="search" placeholder="Cari Perusahaan Berdasarkan: Nama Perusahaan atau Barang yang Dibutuhkan Perusahaan  ...">
+                        </div>
+      </div>
+        <button type="submit" class="btn btn-default">Cari</button>
+          </form>
+    </div>
+
   <form action="<?= base_url()?>Perusahaan/tipe" method="post">
 <center>
     <div class="row" align="center">

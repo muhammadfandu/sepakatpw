@@ -8,7 +8,6 @@
   <div class="container filter-box">
     <h2 style="color:#0f0f0f;margin-top:0;">Filter</h2>
     <hr />
-    <form action="<?php echo base_url(); ?>Bahan_baku/tipe" method="post">
     <!--<div class="row">
       <div class="col-md-4">
         <input type="text" class="form-control" placeholder="Kata kunci" />
@@ -19,6 +18,22 @@
 
       <br><br>
   </div>-->
+    <div class="row">
+      <div class="col-md-11" style="padding-left: 25px;">
+        <!--<h4>Tambahkan Komentar</h4>-->
+          <form action="<?php echo base_url('Bahan_baku/cari')?>" method="post">
+                         <div class="input-group" style="width:100%;">
+                             <!-- <div class="input-group-addon" style="width:150px;text-align:right;">Tambahkan komentar</div> -->
+                             <input type="text" class="form-control" name="search" placeholder="Cari Penyedia Berdasarkan: Nama Penyedia atau Barang/bahan yang Dihasilkan Penyedia ...">
+                        </div>
+          <input type="hidden" name="kategori" value="<?= $kategori[0]['id_kategori']?>">
+      </div>
+        <button type="submit" class="btn btn-default">Kirim</button>
+        </form>
+    </div>
+
+
+    <form action="<?php echo base_url(); ?>Bahan_baku/tipe" method="post">
     <div class="row">
       <div class="col-md-4 col-md-offset-2 text-left" style="line-height:2;">
         <h3 style="color:grey;">Tipe Perusahaan</h3>

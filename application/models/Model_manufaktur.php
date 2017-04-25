@@ -14,6 +14,16 @@ Class Model_manufaktur extends CI_Model {
       return $query->result_array();
   }
 
+  function search($search){
+    $query = $this->db
+      ->select('*')
+      ->from('manufaktur')
+      ->like('nama', $search, 'both')
+      ->or_like('barang_dibutuhkan', $search, 'both')
+      ->get();
+    return $query->result_array();
+  }
+
   function get_peru(){
     $query = $this->db->query("SELECT * FROM `manufaktur` WHERE `kota` IS NOT NULL");
     return $query->result_array();

@@ -23,7 +23,7 @@ var $table = 'bahan_baku';
 
 	function get_databahan($id){
     $query = $this->db
-             ->select('id_bahan_baku, nama, alamat, no_telp, email, bukti, total_produksi, kategori.kategori, barang_bahan, provinsi, kota, bahan_baku.icon, gambar_latar, deskripsi, id_user, jam_kerja, tipe')
+             ->select('id_bahan_baku, nama, alamat, no_telp, email, bukti, total_produksi, kategori.kategori, barang_bahan, harga, provinsi, kota, bahan_baku.icon, gambar_latar, deskripsi, id_user, jam_kerja, tipe')
              ->from('bahan_baku')
 						 ->join('kategori', 'kategori.id_kategori = bahan_baku.kategori')
              ->where('id_bahan_baku', $id)
@@ -80,6 +80,16 @@ var $table = 'bahan_baku';
       ->where('konfirmasi', 0)
       ->get();
     return $query->num_rows();
+  }
+
+  function search($search){
+    $query = $this->db
+      ->select('*')
+      ->from('bahan_baku')
+      ->like('nama', $search, 'both')
+      ->or_like('barang_bahan', $search, 'both')
+      ->get();
+    return $query->result_array();
   }
 
 	function get_idm($id_user){

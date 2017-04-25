@@ -20,6 +20,18 @@
       $this->load->view('footer');
     }
 
+    public function cari(){
+      $this->load->database();
+      $this->load->model('Model_manufaktur');
+
+      $search         = $this->input->post('search');
+      $data['query']  = $this->Model_manufaktur->search($search);
+
+      $this->load->view('header');
+      $this->load->view('perusahaan-list', $data);
+      $this->load->view('footer');
+    }
+
     /*public function dat_dir(){
 
       $data['perusahaan'] = $this->Model_manufaktur->get_peru_single($_SESSION['id_user']);

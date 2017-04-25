@@ -7,7 +7,7 @@
     $nama     = $a['nama'];
     $email    = $a['email'];
     $kategori = $a['kategori'];
-    $gamlat   = $a['gambar_latar'];
+    $gamlat   = $a['gambar_latar'];   
   }
 
 
@@ -56,7 +56,7 @@
           <span><i class="fa fa-fw fa-map-marker"></i> <?= $a['provinsi'];?>, <?=$a['kota'];?></span><br>
         </div>
         <div class="col-md-4">
-          <span><i class="fa fa-fw fa-cubes"></i> <?= $a['total_produksi'];?>Kg / Bulan</span>
+          <span><i class="fa fa-fw fa-cubes"></i> <?= $a['total_produksi'];?>Kg / Bulan <b><?= $a['harga'];?></b></span>
         </div>
         <div class="col-md-4">
           <span><i class="fa fa-fw fa-exchange"></i><?= $a['tipe'];?></span>
@@ -91,7 +91,7 @@
             <input type="hidden" name="idb" value="">
 
             <div class="col-md-4 pull-right"><br>
-               <a href="<?= base_url('index.php/login')?>"><span class='btn btn-primary'>Login untuk Bekerja Sama</span>
+               <a href="<?= base_url('index.php/login')?>"><span class='btn btn-primary'>Login untuk Bekerja Sama</span></a>
             </div>
 
         <?php

@@ -7,9 +7,9 @@ class Bahan_baku extends CI_Controller {
 
 	  $this->load->database();
 	  $this->load->model('Model_bahan_baku');
-      $this->load->model('model_kategori');
-	  $data['query']=$this->Model_bahan_baku->get_bahan($id);
-      $data['kategori']=$this->model_kategori->get_by_id($id);
+    $this->load->model('model_kategori');
+	  $data['query']     = $this->Model_bahan_baku->get_bahan($id);
+    $data['kategori']  = $this->model_kategori->get_by_id($id);
 
 	//   echo '<pre>';
 	//   print_r($data);
@@ -89,6 +89,21 @@ alert('There are no fields to generate a report');
 </script>";*/
      $this->tipe();
         }
+
+    public function cari(){
+      $this->load->model('Model_bahan_baku');
+      $this->load->model('model_kategori');
+
+      $kategori = $this->input->post('kategori');
+      $search   = $this->input->post('search');
+
+      $data['kategori']   = $this->model_kategori->get_by_id($kategori);
+      $data['query']      = $this->Model_bahan_baku->search($search);
+
+      $this->load->view('header');
+      $this->load->view('penyedia-list',$data);
+      $this->load->view('footer');
+    }
 
 
 }
