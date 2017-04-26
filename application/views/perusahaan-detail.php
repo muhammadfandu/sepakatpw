@@ -1,6 +1,6 @@
 <?php
   $id_user    = $this->session->userdata('id_user');
-
+error_reporting(E_ALL);
   /*foreach ($query as $a) {
     $id       = $a['id_manufaktur'];
     $nama     = $a['nama'];
@@ -42,6 +42,10 @@
         <h2 style="margin-top:0;font-weight: 200;"><?= $query[0]['nama'];?></h2>
         <span style="color:#b0b0b0;"></span>  <span class="label-primary">Membutuhkan: <?= $query[0]['barang_dibutuhkan'];?></span>
       </div>
+      <div class="col-md-2">
+         <h3><span style="color:#b0b0b0;"></span>  <span class="label-primary">Rating: <?php if (isset($a)) {  echo $a; } else{ echo"0.0";};?></span></h3>
+        
+      </div>
       <!--<div class="col-md-2 text-center">
         <span>2 jam yang lalu</span>
       </div>-->
@@ -74,7 +78,7 @@
       </div>
     </div>
     <div class="row company-action">
-      <div class="col-md-8 pull-left">
+      <div class="col-md-4 pull-left">
         <h4 style="margin-top:20px;">Bagikan di
           <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span>
           <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span>
@@ -82,6 +86,43 @@
           <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x fa-inverse"></i></span>
         </h4>
       </div>
+
+<div class="col-md-4 pull-left">
+       
+<h3 style="margin-top:20px;">Berikan Rating
+<form action="<?php echo base_url(); ?>Perusahaan/rating" method="POST">
+       <span>
+                    <fieldset id='demo3' class="rating" >
+                        <input class="stars" onclick="displayResult(this.value)" type="radio" id="star53" name="rating" value="5" />
+                        <label class = "full" for="star53" title="5"></label>
+                        <input class="stars" onclick="displayResult(this.value)" type="radio" id="star4half3" name="rating" value="4.5" />
+                        <label class="half" for="star4half3" title="4.5"></label>
+                        <input class="stars" onclick="displayResult(this.value)" type="radio" id="star43" name="rating" value="4" />
+                        <label class = "full" for="star43" title="4"></label>
+                        <input class="stars" onclick="displayResult(this.value)" type="radio" id="star3half3" name="rating" value="3.5" />
+                        <label class="half" for="star3half3" title="3.5"></label>
+                        <input class="stars" onclick="displayResult(this.value)" type="radio" id="star33" name="rating" value="3" />
+                        <label class = "full" for="star33" title="3"></label>
+                        <input class="stars" onclick="displayResult(this.value)" type="radio" id="star2half3" name="rating" value="2.5" />
+                        <label class="half" for="star2half3" title="2.5"></label>
+                        <input class="stars" onclick="displayResult(this.value)" type="radio" id="star23" name="rating" value="2" />
+                        <label class = "full" for="star23" title="2"></label>
+                        <input class="stars" onclick="displayResult(this.value)" type="radio" id="star1half3" name="rating" value="1.5" />
+                        <label class="half" for="star1half3" title="1.5"></label>
+                        <input class="stars" onclick="displayResult(this.value)" type="radio" id="star13" name="rating" value="1" />
+                        <label class = "full" for="star13" title="1"></label>
+                        <input class="stars" onclick="displayResult(this.value)" type="radio" id="starhalf3" name="rating" value="0.5" />
+                        <label class="half" for="starhalf3" title="0.5"></label>
+                    </fieldset>
+                    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span><input type="submit" name="submit" class="btn btn-primary" value="Beri rating"></span>
+                    <span><input type="hidden" name="idmanuf" value="<?= $query[0]['id_manufaktur'];?>"></span>
+                    <span>
+                    <div><input type="hidden" name="valsta" id="valsta"></div></span>
+                    </form>
+                    </h3>
+
+</div>
 
       <form action="<?= base_url('index.php/perusahaan/kerjasama');?>" method="POST" >
 
@@ -91,7 +132,7 @@
             <input type="hidden" name="idm" value="">
             <input type="hidden" name="idb" value="">
 
-            <div class="col-md-4 pull-right"><br>
+            <div class="col-md-3 pull-right"><br>
               <a href="<?= base_url('index.php/login/')?>"><span class='btn btn-primary'>Login untuk Bekerja Sama</span></a>
             </div>
 
@@ -104,7 +145,7 @@
         <input type="hidden" name="idm" value="<?= $idm;?>">
         <input type="hidden" name="idb" value="<?= $id_bahan;?>">
 
-        <div class="col-md-4 pull-right"><br>
+        <div class="col-md-3 pull-right"><br>
           <?php
             $email_sen  = $query[0]['email'];
 
@@ -145,3 +186,18 @@
 
   </div>
 </div>
+
+       <script>
+function displayResult(rating){ 
+ document.getElementById("valsta").value=rating; 
+}
+                        $(document).ready(function () {
+                            $("#demo3 .stars").click(function () {
+
+                                var label = $("label[for='" + $(this).attr('id') + "']");
+                                
+                                $("#feedback").text(label.attr('title'));
+                                $(this).attr("checked");
+                            });
+                         });
+                    </script>

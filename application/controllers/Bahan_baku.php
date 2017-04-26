@@ -8,22 +8,58 @@ class Bahan_baku extends CI_Controller {
 	  $this->load->database();
 	  $this->load->model('Model_bahan_baku');
       $this->load->model('model_kategori');
-	  $data['query']=$this->Model_bahan_baku->get_bahan($id);
-      $data['kategori']=$this->model_kategori->get_by_id($id);
+      //$asd = "1";
+      $ad = $this->input->post('asd');
+    $datak = $this->Model_bahan_baku->hitung($id);
+    $datas = $this->Model_bahan_baku->bagi($id);
 
-	//   echo '<pre>';
-	//   print_r($data);
-	//  echo '</pre>';
+    if($datas->prices > 0){
+       $dabs = $datas->prices/$datak;
+    $data['as'] = number_format($dabs,1);
+     $data['query']=$this->Model_bahan_baku->get_bahan($id);
+      $data['kategori']=$this->model_kategori->get_by_id($id);
+  //   echo '<pre>';
+  //   print_r($data);
+  //  echo '</pre>';
 
       $this->load->view('header');
       $this->load->view('penyedia-list', $data);
       $this->load->view('footer');
+    }
+    else{
+      $data['query']=$this->Model_bahan_baku->get_bahan($id);
+      $data['kategori']=$this->model_kategori->get_by_id($id);
+  //   echo '<pre>';
+  //   print_r($data);
+  //  echo '</pre>';
+
+      $this->load->view('header');
+      $this->load->view('penyedia-list', $data);
+      $this->load->view('footer');
+    }
+	  
 	}
 
 	public function showmore_detail($id){
       $this->load->database();
 
       $this->load->model('Model_bahan_baku');
+
+      $datak = $this->Model_bahan_baku->hitung($id);
+    $datas = $this->Model_bahan_baku->bagi($id);
+    if($datas->prices > 0){
+       $dabs = $datas->prices/$datak;
+    $data['as'] = number_format($dabs,1);
+      $data['query']  = $this->Model_bahan_baku->get_databahan($id);
+
+      $id_user        = $this->session->userdata('id_user');
+      $data['idm']    = $this->Model_bahan_baku->get_idm($id_user);
+
+      $this->load->view('header');
+      $this->load->view('penyedia-detail', $data);
+      $this->load->view('footer');
+      
+    }else{
       $data['query'] 	= $this->Model_bahan_baku->get_databahan($id);
 
 			$id_user    		= $this->session->userdata('id_user');
@@ -32,6 +68,7 @@ class Bahan_baku extends CI_Controller {
       $this->load->view('header');
       $this->load->view('penyedia-detail', $data);
       $this->load->view('footer');
+    }
   }
 
  public function tipe()
@@ -75,7 +112,29 @@ alert('There are no fields to generate a report');
 </script>";*/
      $this->tipe();
         }
+ public function rating(){
+      $this->load->database();
+      $this->load->model('Model_bahan_baku');
+      $id_user= $this->session->userdata('id_user');
+      $id_user_rated=$this->input->post('idbb');
+      $valsta=$this->input->post('valsta');
 
+   if($this->input->post('submit')){
+     $data = array(
+   'id_user'=>$id_user,
+   'id_user_rated'=>$id_user_rated,
+   'rating'=>$valsta
+
+   );
+  // echo $id_user_rated;
+  // echo"<br>";
+  // echo $id_user;
+  // echo"<br>";
+  // echo $valsta;
+    $this->Model_bahan_baku->tambahrating($data);
+    redirect('Bahan_baku/showmore_detail/'.$id_user_rated);
+    }
+  }
 
 }
 ?>

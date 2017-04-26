@@ -199,6 +199,23 @@ public function kategori()
    $query = $this->db->get('kategori');
     return $query->result_array();
   }
+  function tambahrating($datas){
+  
+  $this->db->insert('rating', $datas);
+  
+  }
+  function hitung($id)
+    {
+      $query = $this->db->query('SELECT * FROM `rating` where id_user_rated = '.$id.'');
+      $result = $query->num_rows();
+      return $result;
+    }
+    function bagi($id)
+    {
+      $query = $this->db->query('SELECT SUM(rating) AS prices FROM `rating` where id_user_rated = '.$id.'');
+      $result = $query->row();
+      return $result;
+    }
 }
 
 ?>

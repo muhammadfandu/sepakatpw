@@ -13,11 +13,19 @@
     public function index(){
       $this->load->database();
       $this->load->model('Model_manufaktur');
+    //   $id = $this->input->post('idne');
+    //   $datak = $this->Model_manufaktur->hitung($id);
+    // $datas = $this->Model_manufaktur->bagi($id);
+    // if($datas->prices > 0){
+      // $dabs = $datas->prices/$datak;
+   // $data['a'] = number_format($dabs,1);
       $data['query']=$this->Model_manufaktur->get_peru();
 
       $this->load->view('header');
       $this->load->view('perusahaan-list', $data);
       $this->load->view('footer');
+ //  }
+      
     }
 
     /*public function dat_dir(){
@@ -39,6 +47,11 @@
       $this->load->model('Model_manufaktur');
       $this->load->model('Model_bahan_baku');
 
+      $datak = $this->Model_manufaktur->hitung($id);
+    $datas = $this->Model_manufaktur->bagi($id);
+    if($datas->prices > 0){
+       $dabs = $datas->prices/$datak;
+    $data['a'] = number_format($dabs,1);
       $data['query']    = $this->Model_manufaktur->get_peru_all($id);
 
       $id_user          = $this->session->userdata('id_user');
@@ -48,7 +61,42 @@
       $this->load->view('header');
       $this->load->view('perusahaan-detail', $data);
       $this->load->view('footer');
+      
+    }else{  
+     $data['query']    = $this->Model_manufaktur->get_peru_all($id);
+
+      $id_user          = $this->session->userdata('id_user');
+      $data['kueri']    = $this->Model_bahan_baku->get_id_ban($id_user);
+
+      $this->load->helper('url');
+      $this->load->view('header');
+      $this->load->view('perusahaan-detail', $data);
+      $this->load->view('footer');
     }
+    }
+    public function rating(){
+      $this->load->database();
+      $this->load->model('Model_manufaktur');
+      $id_user= $this->session->userdata('id_user');
+      $id_user_rated=$this->input->post('idmanuf');
+      $valsta=$this->input->post('valsta');
+
+   if($this->input->post('submit')){
+     $data = array(
+   'id_user'=>$id_user,
+   'id_user_rated'=>$id_user_rated,
+   'rating'=>$valsta
+
+   );
+  // echo $id_user_rated;
+  // echo"<br>";
+  // echo $id_user;
+  // echo"<br>";
+  // echo $valsta;
+    $this->Model_manufaktur->tambahrating($data);
+    redirect('Perusahaan/detail/'.$id_user_rated);
+    }
+  }
 
     public function isidetail(){
       $this->load->helper('url');

@@ -1,3 +1,6 @@
+<?php 
+error_reporting(0);
+?>
 <div class="main-banner">
   <div class="container" style="padding-top:10%;color:white;">
     <h1>Cari Perusahaan</h1>
@@ -80,6 +83,12 @@
           <h2 style="margin-top:0;font-weight: 200;"><?php echo $a['nama'];?></h2>
           <span class="label-primary">Membutuhkan: <?php echo $a['barang_dibutuhkan'];?></span>
         </div>
+        <form method="POST">
+        <div class="col-md-2">
+         <h3><span style="color:#b0b0b0;"></span>  <span class="label-primary">Rating: <?php if (isset($as)) {  echo $as; } else{ echo"0.0";};?></span></h3>
+          <input type="hidden" name="idne" value="<?= $a['id_manufaktur'];?>">
+      </div>
+      </form>
         <!--<div class="col-md-2 text-center">
           <span>2 jam yang lalu</span>
         </div>-->

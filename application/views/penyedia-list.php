@@ -73,15 +73,18 @@
     <div class="col-xs-12 company-item">
         <div class="row company-itemhead">
           <div class="col-md-1">
-            <img src="<?php echo base_url($gambar); ?>" class="img-responsive"/>
+            <img src="<?php echo base_url($gambar);?>" class="img-responsive"/>
           </div>
           <div class="col-md-9">
-            <h2 style="margin-top:0;font-weight: 200;"> <?php echo $a['nama'];?> <!-- PT. Extra Steel Indonesia --></h2>
+            <h2 style="margin-top:0;font-weight: 200;"> <?php echo $a['nama'];?><!-- PT. Extra Steel Indonesia --></h2>
             <span class="label-primary"> Menghasilkan: <?php echo $a['barang_bahan'];?> </span>
           </div>
           <div class="col-md-2 text-center">
             <span>2 jam yang lalu</span>
           </div>
+           <div class="col-md-2">
+         <h3><span style="color:#b0b0b0;"></span>  <span class="label-primary">Rating: <?php if (isset($as)) {  echo $as; } else{ echo"0.0";};?></span></h3>
+      </div>
       </div>
       <div class="row company-itembody">
         <div class="col-md-12" align="justify">
@@ -98,6 +101,11 @@
         <div class="col-md-4">
           <span><i class="fa fa-fw fa-exchange"></i></span>
         </div>
+        <form method="POST">
+        <div>
+        <input type="text" name="asd" value="<?php echo $a['id_bahan_baku'];?>">
+        </div>
+        </form>
       </div>
     </div>
 
