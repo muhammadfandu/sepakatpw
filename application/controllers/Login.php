@@ -77,9 +77,9 @@
 				$notif_man 		= $this->Model_manufaktur->get_notif($id_manufaktur[0]['id_manufaktur']);
 				$nama_ban['query']		= $this->Model_bahan_baku->get_name_ker_ban($id_manufaktur[0]['id_bahan_baku']);
                 echo "<pre>";
-                print_r($_SESSION);
-                print_r($q);
-				print_r($id_manufaktur);
+                // print_r($_SESSION);
+                // print_r($q);
+				// print_r($id_manufaktur);
 				// print_r($id_manufaktur[0]['id_manufaktur']);
 				echo "</pre>";
                 // die;

@@ -5,24 +5,11 @@
       $this->load->database();
 
       $this->load->model('model_feed');
-      $data['query'] = $this->model_feed->get_all_feed();
+      $data['feed'] = $this->model_feed->get_feed_manufaktur();
 
-      $id = $this->session->userdata('id_user');
-
-      $row_pen  = $this->model_feed->get_user_pen($id);
-      $row_per  = $this->model_feed->get_user_per($id);
-
-      if ($row_pen = 1){
-        $data['user'] = $this->model_feed->get_user_pen_all($id);
-      }
-
-      if ($row_per = 1) {
-        $data['user'] = $this->model_feed->get_user_per_all($id);
-      }
-
-      /*echo "<pre>";
-         print_r($data);
-      echo "</pre>";*/
+    //   echo "<pre>";
+    //   print_r($data);
+    //   echo "</pre>";
 
       $this->load->view('header');
       $this->load->view('feed_perusahaan', $data);
@@ -34,43 +21,16 @@
       $this->load->database();
 
       $this->load->model('model_feed');
-      $data['query'] = $this->model_feed->get_all_feed();
+      $data['feed'] = $this->model_feed->get_feed_penyedia();
 
-      $id = $this->session->userdata('id_user');
+    //   echo "<pre>";
+    //   print_r($data);
+    //   echo "</pre>";
 
-      $row_pen  = $this->model_feed->get_user_pen($id);
-      $row_per  = $this->model_feed->get_user_per($id);
-
-      if ($row_pen = 1){
-        $data['user'] = $this->model_feed->get_user_pen_all($id);
-        $this->load->view('header');
-        $this->load->view('feed_penyedia', $data);
-        $this->load->view('footer');
-      } else {
-        $this->load->view('header');
-        $this->load->view('feed_penyedia');
-        $this->load->view('footer');
-      }
-
-      if ($row_per = 1) {
-        $data['user'] = $this->model_feed->get_user_per_all($id);
-        $this->load->view('header');
-        $this->load->view('feed_penyedia', $data);
-        $this->load->view('footer');
-      } else{
-        $this->load->view('header');
-        $this->load->view('feed_penyedia');
-        $this->load->view('footer');
-      }
-
-      /*echo "<pre>";
-         print_r($data);
-      echo "</pre>";*/
-
-      /*$this->load->view('header');
+      $this->load->view('header');
       $this->load->view('feed_penyedia', $data);
-      $this->load->view('footer');*/
-    }
+      $this->load->view('footer');
+  }
 
     public function add_perusahaan_feed(){
       $this->load->helper('url');
@@ -129,7 +89,7 @@
               'id_user'       => $this->input->post('id_us'),
               'isi'           => $this->input->post('posting'),
               'gambar'	      => $target_file,
-              'tanggal'       => date("Y/m/d"),
+              'tanggal'       => date("Y-m-d H:i:s"),
               'waktu'         => date("h:i:sa")
             );
 
@@ -160,8 +120,44 @@
           $this->load->view('feed_list');
           $this->load->view('footer');
         }
+    }
 
+    public function detail_perusahaan($id){
+        $this->load->helper('url');
+        $this->load->database();
 
+        $this->load->model('model_feed');
+        $this->load->model('Model_komentar');
+
+        $data['feed'] = $this->model_feed->manufaktur_get_by_id($id);
+        $data['komentar'] = $this->Model_komentar->get_by_post1($id);
+
+        // echo '<pre>';
+        // print_r($data['komentar']);
+        // echo '</pre>';
+
+        $this->load->view('header');
+        $this->load->view('feed_complete',$data);
+        $this->load->view('footer');
+    }
+
+    public function detail_bahan_baku($id){
+        $this->load->helper('url');
+        $this->load->database();
+
+        $this->load->model('Model_komentar');
+        $this->load->model('model_feed');
+
+        $data['feed'] = $this->model_feed->penyedia_get_by_id($id);
+        $data['komentar'] = $this->Model_komentar->get_by_post2($id);
+
+        // echo '<pre>';
+        // print_r($data['komentar']);
+        // echo '</pre>';
+
+        $this->load->view('header');
+        $this->load->view('feed_complete',$data);
+        $this->load->view('footer');
     }
   }
 ?>

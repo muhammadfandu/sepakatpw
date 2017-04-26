@@ -8,7 +8,7 @@
       <div class="row section1-header">
             <h2 style="font-weight:600;">Kategori Penyedia Bahan Baku</h2>
         </div>
-          <?php 
+          <?php
             foreach($kategori as $u){
               $id = $u['id_kategori'];
           ?>
@@ -35,7 +35,7 @@
         <div class="row section1-header">
             <h2 style="font-weight:600;">Kategori Penyedia Bahan Baku</h2>
         </div>
-          <?php 
+          <?php
             foreach($kategori as $u){
               $id = $u['id_kategori'];
           ?>
@@ -57,7 +57,7 @@
 
 
   <nav aria-label="Page navigation" class="text-center">
-    <ul class="pagination">
+    <!--<ul class="pagination">
       <li>
         <a href="#" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
@@ -73,6 +73,6 @@
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>
-    </ul>
+  </ul>-->
   </nav>
 </div>

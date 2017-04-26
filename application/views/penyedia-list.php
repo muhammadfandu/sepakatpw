@@ -8,29 +8,39 @@
   <div class="container filter-box">
     <h2 style="color:#0f0f0f;margin-top:0;">Filter</h2>
     <hr />
-    <form action="<?php echo base_url(); ?>Bahan_baku/tombol" method="post">
-    <div class="row">
+    <!--<div class="row">
       <div class="col-md-4">
         <input type="text" class="form-control" placeholder="Kata kunci" />
       </div>
       <div class="col-md-4">
         <input type="text" class="form-control" placeholder="Lokasi" />
       </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option value="">Kategori</option>
-        </select>
-      </div>
+
       <br><br>
-    </div>
+  </div>-->
     <div class="row">
-      <div class="col-md-4 text-left" style="line-height:2;">
+      <div class="col-md-11" style="padding-left: 25px;">
+        <!--<h4>Tambahkan Komentar</h4>-->
+          <form action="<?php echo base_url('Bahan_baku/cari')?>" method="post">
+                         <div class="input-group" style="width:100%;">
+                             <!-- <div class="input-group-addon" style="width:150px;text-align:right;">Tambahkan komentar</div> -->
+                             <input type="text" class="form-control" name="search" placeholder="Cari Penyedia Berdasarkan: Nama Penyedia atau Barang/bahan yang Dihasilkan Penyedia ...">
+                        </div>
+          <input type="hidden" name="kategori" value="<?= $kategori[0]['id_kategori']?>">
+      </div>
+        <button type="submit" class="btn btn-default">Kirim</button>
+        </form>
+    </div>
+
+
+    <form action="<?php echo base_url(); ?>Bahan_baku/tipe" method="post">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-2 text-left" style="line-height:2;">
         <h3 style="color:grey;">Tipe Perusahaan</h3>
         <div class="checkbox">
-           <label><input name="tipes[]" type="checkbox" value="Perusahaan Besar" />Perusahaan Besar</label><br>
-          <label><input name="tipes[]" type="checkbox" value="Perusahaan Sedang" />Perusahaan Sedang</label><br>
-          <label><input name="tipes[]" type="checkbox" value="Perusahaan Kecil" />Perusahaan Kecil</label><br>
-          <label><input name="tipes[]" type="checkbox" value="Home Industri" />Home Industri</label><br>
+          <label><input name="tipes[]" type="checkbox" value="Penyedia Besar" />Pernyedia Besar</label><br>
+          <label><input name="tipes[]" type="checkbox" value="Penyedia Sedang" />Penyedia Sedang</label><br>
+          <label><input name="tipes[]" type="checkbox" value="Penyedia Kecil" />Penyedia Kecil</label><br>
         </div>
       </div>
       <div class="col-md-4 text-left" style="line-height:2;">
@@ -42,25 +52,32 @@
           <label><input name="banyak[]" type="checkbox" value="499" />Kurang dari 0,5 ton / bulan</label><br>
         </div>
       </div>
-      <div class="col-md-4 text-left" style="line-height:2;">
+      <!--<div class="col-md-4">
+        <select class="form-control">
+          <option value="">Kategori</option>
+        </select>
+    </div>-->
+      <!--<div class="col-md-4 text-left" style="line-height:2;">
         <h3 style="color:grey;">Waktu</h3>
         <div class="checkbox">
          <label><input type="radio" name="rad[]" value="terbaru"/>Terbaru</label><br>
           <label><input type="radio" name="rad[]" value="terlama"/>Terlama</label><br>
         </div>
-      </div>
+    </div>-->
     </div>
-    <div class="row" style="background-color:rgb(240, 240, 240);margin-top:40px;">
+    <div class="row" style="background-color:rgb(240, 240, 240);margin-top:20px;">
       <div class="col-md-3 col-md-offset-9">
         <br><button class="btn btn-primary">Terapkan Filter</button><br><br>
       </div>
     </div>
+
+    <input type="hidden" name="kategori" value="<?= $kategori[0]['id_kategori']?>">
     </form>
   </div>
 </div></div>
 
 <div class="container-fluid section1" style="padding-top:80px;">
-    <!-- <center><h1><?php echo $kategori['kategori']?></h1></center> -->
+    <center><h1><?php echo $kategori[0]['kategori']?></h1></center>
     <hr>
   <div class="container">
     <?php
@@ -80,7 +97,7 @@
             <span class="label-primary"> Menghasilkan: <?php echo $a['barang_bahan'];?> </span>
           </div>
           <div class="col-md-2 text-center">
-            <span>2 jam yang lalu</span>
+            <!-- <span>2 jam yang lalu</span> -->
           </div>
            <div class="col-md-2">
          <h3><span style="color:#b0b0b0;"></span>  <span class="label-primary">Rating: <?php if (isset($as)) {  echo $as; } else{ echo"0.0";};?></span></h3>
@@ -99,7 +116,7 @@
           <span><i class="fa fa-fw fa-cubes"></i> <?= $a['total_produksi']?> Kg</span>
         </div>
         <div class="col-md-4">
-          <span><i class="fa fa-fw fa-exchange"></i></span>
+          <span><i class="fa fa-fw fa-exchange"></i> <?= $a['tipe']?></span>
         </div>
         <form method="POST">
         <div>

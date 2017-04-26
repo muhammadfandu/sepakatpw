@@ -28,6 +28,18 @@
       
     }
 
+    public function cari(){
+      $this->load->database();
+      $this->load->model('Model_manufaktur');
+
+      $search         = $this->input->post('search');
+      $data['query']  = $this->Model_manufaktur->search($search);
+
+      $this->load->view('header');
+      $this->load->view('perusahaan-list', $data);
+      $this->load->view('footer');
+    }
+
     /*public function dat_dir(){
 
       $data['perusahaan'] = $this->Model_manufaktur->get_peru_single($_SESSION['id_user']);
@@ -197,6 +209,11 @@
                 'deskripsi'          =>$deskripsi,
                 'jam_kerja'          =>$jam
              );
+
+               echo "<pre>";
+               print_r($data);
+               echo "</pre>";
+            //    die;
 
              /*echo $id ." ". $nama ." ". $alamat ." ". $provinsi ." ". $kota ." ". $notelp ." ". $email ." ". $tipe ." ". $butuh ."  ". $banyak ." ". $target_file;*/
 
@@ -434,10 +451,5 @@
       print_r($_SESSION);
       echo "</pre>";
   }
-   public function tombol()
-  {
-    $this->tipe();
-  }
-    
 }
 ?>

@@ -169,8 +169,7 @@
               <center><div class="input-group-addon">Deskripsi Perusahaan</div></center>
          </div>
          <div class="input-group input-data">
-             <div style="height:75px" id="summernote" class="form-control"  value="<?= $perusahaan[0]['deskripsi'];?>"></div>
-             <textarea style="display:none;" id="lawsContent" name="deskripsi" class="form-control"></textarea>
+             <textarea name="deskripsi" id="lawsContent" class="form-control"><?php echo $perusahaan[0]['deskripsi']?></textarea>
          </div>
          <br>
         </div>

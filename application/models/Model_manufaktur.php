@@ -13,13 +13,19 @@ Class Model_manufaktur extends CI_Model {
                         ->get();
       return $query->result_array();
   }
- var $table = 'manufaktur';
-  function get_peru(){
-    $query = $this->db->get('manufaktur');
+
+  function search($search){
+    $query = $this->db
+      ->select('*')
+      ->from('manufaktur')
+      ->like('nama', $search, 'both')
+      ->or_like('barang_dibutuhkan', $search, 'both')
+      ->get();
     return $query->result_array();
   }
-   function get_pens_single(){
-    $query = $this->db->get('manufaktur');
+
+  function get_peru(){
+    $query = $this->db->query("SELECT * FROM `manufaktur` WHERE `kota` IS NOT NULL");
     return $query->result_array();
   }
 
@@ -30,7 +36,7 @@ Class Model_manufaktur extends CI_Model {
 
   function get_pen_single($id){
     $query = $this->db
-      ->select('id_bahan_baku, nama, alamat, no_telp, email, bukti, banyak_kebutuhan, kategori.kategori, barang_bahan, provinsi, kota, bahan_baku.icon, gambar_latar, deskripsi, id_user, tipe')
+      ->select('id_bahan_baku, nama, alamat, no_telp, email, bukti, total_produksi, kategori.kategori, barang_bahan, provinsi, kota, bahan_baku.icon, gambar_latar, deskripsi, id_user, tipe')
       ->from('bahan_baku')
       ->join('kategori','kategori.id_kategori = bahan_baku.kategori')
       ->where('bahan_baku.id_user',$id)
@@ -59,14 +65,15 @@ Class Model_manufaktur extends CI_Model {
       ->get();
     return $query->num_rows();
   }
-  function select_data()
- {
-  $query = $this->db->query('SELECT * 
-FROM  `manufaktur` 
-WHERE nama IS NOT NULL and alamat IS NOT NULL and no_telp IS NOT NULL and email IS NOT NULL and tipe IS NOT NULL and banyak_kebutuhan IS NOT NULL and barang_dibutuhkan IS NOT NULL and provinsi IS NOT NULL and kota IS NOT NULL');
-    return $query->result_array();
- }
-  
+  function select_data(){
+    $manufaktur = $this->db
+    ->select('id_manufaktur, nama, alamat, no_telp, email, bukti, kategori.kategori, barang_dibutuhkan, manufaktur.provinsi, kota.kota')
+    ->from('manufaktur')
+    ->join('kategori', 'kategori.kategori = manufaktur.kategori')
+    ->join('kota', 'kota.kota = manufaktur.kota')
+    ->get();
+    return $manufaktur->result_array();
+  }
 
   function tambah_manufaktur($data){
     $this->db->insert('manufaktur', $data);
@@ -86,28 +93,28 @@ WHERE nama IS NOT NULL and alamat IS NOT NULL and no_telp IS NOT NULL and email 
     $this->db->update($table,$data);
   }
 
- public function carri($ban)
+  public function carri($ban)
     {
        if($ban >=3000)
       {
-        $this->db->where('banyak_kebutuhan >=',$ban);
+        $this->db->where('jumlah >=',$ban);
         $query = $this->db->get('manufaktur');
         return $query->result_array();
       }elseif($ban >=1000 AND $ban <3000)
       {
-        $this->db->where('banyak_kebutuhan <3000 and banyak_kebutuhan >=1000');
+        $this->db->where('jumlah <3000 and jumlah >=1000');
         $query = $this->db->get('manufaktur');
         return $query->result_array();
       }
       elseif($ban >=500 AND $ban <1000)
       {
-        $this->db->where('banyak_kebutuhan <1000 and banyak_kebutuhan >=500');
+        $this->db->where('jumlah <1000 and jumlah >=500');
         $query = $this->db->get('manufaktur');
         return $query->result_array();
       }
       elseif($ban <500)
       {
-        $this->db->where('banyak_kebutuhan <500');
+        $this->db->where('jumlah <500');
         $query = $this->db->get('manufaktur');
         return $query->result_array();
       }
@@ -121,7 +128,7 @@ WHERE nama IS NOT NULL and alamat IS NOT NULL and no_telp IS NOT NULL and email 
     public function gab(){
       $this->db
       ->where('tipe', $keyword)
-      ->where('banyak_kebutuhan >=',$ban);
+      ->where('jumlah >=',$ban);
         $query = $this->db->get('manufaktur');
         return $query->result_array();
     }
@@ -137,7 +144,7 @@ WHERE nama IS NOT NULL and alamat IS NOT NULL and no_telp IS NOT NULL and email 
         $query = $this->db->get('manufaktur');
         return $query->result_array();
       }
-      
+
     }
 
     public function update_profil($id, $data)
@@ -194,6 +201,7 @@ WHERE nama IS NOT NULL and alamat IS NOT NULL and no_telp IS NOT NULL and email 
     $this->db->where($where);
     $this->db->update('manufaktur',$data);
   }
+<<<<<<< HEAD
 public function kategori()
   {
    $query = $this->db->get('kategori');
@@ -216,6 +224,9 @@ public function kategori()
       $result = $query->row();
       return $result;
     }
+=======
+
+>>>>>>> fff691549e73b8fc8521d6ef871085595f276357
 }
 
 ?>

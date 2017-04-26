@@ -62,7 +62,7 @@ Class Kategori extends CI_Model{
    function delete_row($id)
   {
   $this->db->where('id_kategori', $id);
-  $this->db->delete('kategori'); 
+  $this->db->delete('kategori');
   }
 }
 ?>

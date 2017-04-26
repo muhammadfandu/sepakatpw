@@ -7,7 +7,7 @@
     $nama     = $a['nama'];
     $email    = $a['email'];
     $kategori = $a['kategori'];
-    $gamlat   = $a['gambar_latar'];
+    $gamlat   = $a['gambar_latar'];   
   }
 
 
@@ -29,8 +29,8 @@
   }*/
 ?>
 
-<div class="sub-banner" >
-  <div class="container" style="background-image: url('<?= $gamlat;?>'); padding-top:10%; color:white;">
+<div class="sub-banner" <?php if($a['gambar_latar']!=null) { ?>style="background-image:url('<?php echo base_url($a['gambar_latar'])?>')"<?php } ?> >
+  <div class="container" style="padding-top:10%; color:white;">
   </div>
   <div class="container filter-box" style="text-align:left; font-size:120%; line-height:2;">
     <div class="row company-itemhead">
@@ -41,13 +41,18 @@
         <h2 style="margin-top:0;font-weight: 200;"><?= $nama;?></h2>
         <span style="color:#b0b0b0;"><?= $a['kategori'];?></span>&nbsp;<span class="label-primary"> Menghasilkan: <?= $a['barang_bahan'];?></span>
       </div>
+<<<<<<< HEAD
       <div class="col-md-2">
          <h3><span style="color:#b0b0b0;"></span>  <span class="label-primary">Rating: <?php if (isset($as)) {  echo $as; } else{ echo"0.0";};?></span></h3>
+=======
+      <div class="col-md-2 text-center">
+        <!-- <span>2 jam yang lalu</span> -->
+>>>>>>> fff691549e73b8fc8521d6ef871085595f276357
       </div>
     </div>
     <div class="row company-itembody">
       <div class="col-md-12" align="justify">
-        <?= $a['deskripsi'];?>
+        <?= substr($a['deskripsi'],0,400);?>...
       </div>
     </div>
     <div class="row company-itemfoot" style="background-color:white;font-size:80%;">
@@ -56,7 +61,7 @@
           <span><i class="fa fa-fw fa-map-marker"></i> <?= $a['provinsi'];?>, <?=$a['kota'];?></span><br>
         </div>
         <div class="col-md-4">
-          <span><i class="fa fa-fw fa-cubes"></i> <?= $a['total_produksi'];?>Kg / Bulan</span>
+          <span><i class="fa fa-fw fa-cubes"></i> <?= $a['total_produksi'];?>Kg / Bulan <b><?= $a['harga'];?></b></span>
         </div>
         <div class="col-md-4">
           <span><i class="fa fa-fw fa-exchange"></i><?= $a['tipe'];?></span>
@@ -126,7 +131,7 @@
             <input type="hidden" name="idb" value="">
 
             <div class="col-md-4 pull-right"><br>
-               <a href="<?= base_url('index.php/login')?>"><span class='btn btn-primary'>Login untuk Bekerja Sama</span>
+               <a href="<?= base_url('index.php/login')?>"><span class='btn btn-primary'>Login untuk Bekerja Sama</span></a>
             </div>
 
         <?php
@@ -165,26 +170,9 @@
 </div>
 
 <div class="container-fluid" style="background-color:white;margin-top:60px;">
-  <!--<div class="container" style="text-align:justify;">
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-    <h4>Our Key Values</h4>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-    <h4>What We Need</h4>
-    <ul>
-      <li>Lorem ipsum dolor sit amet</li>
-      <li>Ut enim ad minim veniam</li>
-      <li>Excepteur sint occaecat cupidatat</li>
-      <li>Consectetur adipisicing elit</li>
-      <li>Lorem ipsum dolor sit amet</li>
-    </ul>
-    <p>
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    </p>
-  </div>-->
+  <div class="container" style="text-align:justify;">
+      <p><?= $a['deskripsi'];?></p>
+  </div>
 </div>
  <script>
 function displayResult(rating){ 
