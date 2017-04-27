@@ -86,6 +86,7 @@ var $table = 'bahan_baku';
     $query = $this->db
       ->select('*')
       ->from('bahan_baku')
+	  ->where('no_telp IS NOT NULL', NULL, FALSE)
       ->like('nama', $search, 'both')
       ->or_like('barang_bahan', $search, 'both')
       ->get();
@@ -256,6 +257,10 @@ function tambahbahan($data1){
                ->set($data)
                ->update($table);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 380ec87f7926dee109f0e459bc22a946ebf78f96
     function update_bahan($where,$data){
     $this->db->where($where);
     $this->db->update('bahan_baku',$data);
@@ -267,9 +272,9 @@ function tambahbahan($data1){
     return $query->result_array();
   }
   function tambahrating($datas){
-  
+
   $this->db->insert('rating', $datas);
-  
+
   }
   function hitung($id)
     {
@@ -283,7 +288,12 @@ function tambahbahan($data1){
       $result = $query->row();
       return $result;
     }
+<<<<<<< HEAD
     function update_rate($id, $data){
+=======
+
+}
+>>>>>>> 380ec87f7926dee109f0e459bc22a946ebf78f96
 
     $this->db->where('id_bahan_baku', $id)->update('bahan_baku', $data); 
 }

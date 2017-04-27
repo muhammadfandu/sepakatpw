@@ -6,9 +6,37 @@ class Bahan_baku extends CI_Controller {
 	public function show_detail($id){
 
 	  $this->load->database();
+<<<<<<< HEAD
     $this->load->model('Model_bahan_baku');
       $this->load->model('model_kategori');
       //$asd = "1";
+=======
+	  $this->load->model('Model_bahan_baku');
+      $this->load->model('model_kategori');
+      //$asd = "1";
+      $ad = $this->input->post('asd');
+    $datak = $this->Model_bahan_baku->hitung($id);
+    $datas = $this->Model_bahan_baku->bagi($id);
+
+    if($datas->prices > 0){
+       $dabs = $datas->prices/$datak;
+    $data['as'] = number_format($dabs,1);
+     $data['query']=$this->Model_bahan_baku->get_bahan($id);
+      $data['kategori']=$this->model_kategori->get_by_id($id);
+  //   echo '<pre>';
+  //   print_r($data);
+  //  echo '</pre>';
+
+    $this->load->model('model_kategori');
+	  $data['query']     = $this->Model_bahan_baku->get_bahan($id);
+    $data['kategori']  = $this->model_kategori->get_by_id($id);
+
+      $this->load->view('header');
+      $this->load->view('penyedia-list', $data);
+      $this->load->view('footer');
+    }
+    else{
+>>>>>>> 380ec87f7926dee109f0e459bc22a946ebf78f96
       $data['query']=$this->Model_bahan_baku->get_bahan($id);
       $data['kategori']=$this->model_kategori->get_by_id($id);
   //   echo '<pre>';
@@ -18,7 +46,12 @@ class Bahan_baku extends CI_Controller {
       $this->load->view('header');
       $this->load->view('penyedia-list', $data);
       $this->load->view('footer');
+<<<<<<< HEAD
    
+=======
+    }
+
+>>>>>>> 380ec87f7926dee109f0e459bc22a946ebf78f96
 	}
 
 	public function showmore_detail($id){
@@ -39,7 +72,7 @@ class Bahan_baku extends CI_Controller {
       $this->load->view('header');
       $this->load->view('penyedia-detail', $data);
       $this->load->view('footer');
-      
+
     }else{
       $data['query'] 	= $this->Model_bahan_baku->get_databahan($id);
 
@@ -100,14 +133,19 @@ class Bahan_baku extends CI_Controller {
 
     }
 
-    public function tombol()
-     {
+    public function tombol(){
 /*echo "<script>
 alert('There are no fields to generate a report');
 </script>";*/
      $this->tipe();
+<<<<<<< HEAD
         }
  public function rating(){
+=======
+    }
+
+ 	public function rating(){
+>>>>>>> 380ec87f7926dee109f0e459bc22a946ebf78f96
       $this->load->database();
       $this->load->model('Model_bahan_baku');
       $id_user= $this->session->userdata('id_user');
@@ -132,12 +170,15 @@ alert('There are no fields to generate a report');
 
     }
   }
+<<<<<<< HEAD
 function updaterate()
     {
     
    $this->load->model('Model_bahan_baku');
    $id = $this->input->post('idbb');
 
+=======
+>>>>>>> 380ec87f7926dee109f0e459bc22a946ebf78f96
 
       $datak = $this->Model_bahan_baku->hitung($id);
     $datas = $this->Model_bahan_baku->bagi($id);
@@ -185,6 +226,10 @@ function updaterate()
       $this->load->view('penyedia-list',$data);
       $this->load->view('footer');
     }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 380ec87f7926dee109f0e459bc22a946ebf78f96
 }
 ?>

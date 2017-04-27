@@ -94,7 +94,7 @@
           </div>
           <div class="col-md-9">
             <h2 style="margin-top:0;font-weight: 200;"> <?php echo $a['nama'];?><!-- PT. Extra Steel Indonesia --></h2>
-            <span class="label-primary"> Menghasilkan: <?php echo $a['barang_bahan'];?> </span>
+            <span class="label-primary"> Menghasilkan: <?php echo $a['barang_bahan'];?> </span>&nbsp;<span class="label-success"><b>Rp. <?= $a['harga'];?> / Kg</b></span>
           </div>
           <div class="col-md-2 text-center">
             <!-- <span>2 jam yang lalu</span> -->
