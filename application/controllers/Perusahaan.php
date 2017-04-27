@@ -106,8 +106,46 @@
   // echo"<br>";
   // echo $valsta;
     $this->Model_manufaktur->tambahrating($data);
+    $this->updaterate();
     redirect('Perusahaan/detail/'.$id_user_rated);
     }
+  }
+
+  function updaterate()
+    {
+    
+   $this->load->model('Model_bahan_baku');
+   $id = $this->input->post('idmanuf');
+
+
+      $datak = $this->Model_manufaktur->hitung($id);
+    $datas = $this->Model_manufaktur->bagi($id);
+    if($datas->prices > 0){
+       $dabs = $datas->prices/$datak;
+    $dat = number_format($dabs,1);
+        if($this->input->post('submit')){
+     $data = array(
+   'rating'=>$dat
+  
+   );
+     echo "<script type='text/javascript'>
+                     alert('Berhasil di update');</script>";
+    $this->Model_manufaktur->update_rate($id,$data);
+
+     redirect('Perusahaan/detail/'.$id);
+    }
+  }else{
+      $data['query']    = $this->Model_manufaktur->get_peru_all($id);
+
+      $id_user          = $this->session->userdata('id_user');
+      $data['kueri']    = $this->Model_bahan_baku->get_id_ban($id_user);
+
+      $this->load->helper('url');
+      $this->load->view('header');
+      $this->load->view('perusahaan-detail', $data);
+      $this->load->view('footer');
+    }
+    
   }
 
     public function isidetail(){

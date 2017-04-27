@@ -100,7 +100,13 @@
             <!-- <span>2 jam yang lalu</span> -->
           </div>
            <div class="col-md-2">
-         <h3><span style="color:#b0b0b0;"></span>  <span class="label-primary">Rating: <?php if (isset($as)) {  echo $as; } else{ echo"0.0";};?></span></h3>
+         <h3><span style="color:#b0b0b0;"></span>  <span class="label-primary">Rating: <?php
+         if ($a['rating'] == 0) {
+           echo"0.0";
+         }
+         else{
+          echo $a['rating'];  }?></span></h3>
+
       </div>
       </div>
       <div class="row company-itembody">
@@ -120,7 +126,7 @@
         </div>
         <form method="POST">
         <div>
-        <input type="text" name="asd" value="<?php echo $a['id_bahan_baku'];?>">
+        <input type="hidden" name="asd" value="<?php echo $a['id_bahan_baku'];?>">
         </div>
         </form>
       </div>

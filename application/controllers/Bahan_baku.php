@@ -6,33 +6,9 @@ class Bahan_baku extends CI_Controller {
 	public function show_detail($id){
 
 	  $this->load->database();
-	  $this->load->model('Model_bahan_baku');
-<<<<<<< HEAD
+    $this->load->model('Model_bahan_baku');
       $this->load->model('model_kategori');
       //$asd = "1";
-      $ad = $this->input->post('asd');
-    $datak = $this->Model_bahan_baku->hitung($id);
-    $datas = $this->Model_bahan_baku->bagi($id);
-
-    if($datas->prices > 0){
-       $dabs = $datas->prices/$datak;
-    $data['as'] = number_format($dabs,1);
-     $data['query']=$this->Model_bahan_baku->get_bahan($id);
-      $data['kategori']=$this->model_kategori->get_by_id($id);
-  //   echo '<pre>';
-  //   print_r($data);
-  //  echo '</pre>';
-=======
-    $this->load->model('model_kategori');
-	  $data['query']     = $this->Model_bahan_baku->get_bahan($id);
-    $data['kategori']  = $this->model_kategori->get_by_id($id);
->>>>>>> fff691549e73b8fc8521d6ef871085595f276357
-
-      $this->load->view('header');
-      $this->load->view('penyedia-list', $data);
-      $this->load->view('footer');
-    }
-    else{
       $data['query']=$this->Model_bahan_baku->get_bahan($id);
       $data['kategori']=$this->model_kategori->get_by_id($id);
   //   echo '<pre>';
@@ -42,8 +18,7 @@ class Bahan_baku extends CI_Controller {
       $this->load->view('header');
       $this->load->view('penyedia-list', $data);
       $this->load->view('footer');
-    }
-	  
+   
 	}
 
 	public function showmore_detail($id){
@@ -132,7 +107,6 @@ alert('There are no fields to generate a report');
 </script>";*/
      $this->tipe();
         }
-<<<<<<< HEAD
  public function rating(){
       $this->load->database();
       $this->load->model('Model_bahan_baku');
@@ -153,11 +127,50 @@ alert('There are no fields to generate a report');
   // echo"<br>";
   // echo $valsta;
     $this->Model_bahan_baku->tambahrating($data);
+    $this->updaterate();
     redirect('Bahan_baku/showmore_detail/'.$id_user_rated);
+
     }
   }
-=======
+function updaterate()
+    {
+    
+   $this->load->model('Model_bahan_baku');
+   $id = $this->input->post('idbb');
 
+
+      $datak = $this->Model_bahan_baku->hitung($id);
+    $datas = $this->Model_bahan_baku->bagi($id);
+    if($datas->prices > 0){
+       $dabs = $datas->prices/$datak;
+    $dat = number_format($dabs,1);
+        if($this->input->post('submit')){
+     $data = array(
+   'rating'=>$dat
+  
+   );
+     echo "<script type='text/javascript'>
+                     alert('Berhasil di update');</script>";
+    $this->Model_bahan_baku->update_rate($id,$data);
+
+     redirect('Bahan_baku/showmore_detail/'.$id);
+    }
+  }else{
+      $data['query']  = $this->Model_bahan_baku->get_databahan($id);
+
+      $id_user        = $this->session->userdata('id_user');
+      $data['idm']    = $this->Model_bahan_baku->get_idm($id_user);
+
+      //   echo '<pre>';
+      //   print_r($data);
+      //  echo '</pre>';
+
+      $this->load->view('header');
+      $this->load->view('penyedia-detail', $data);
+      $this->load->view('footer');
+    }
+    
+  }
     public function cari(){
       $this->load->model('Model_bahan_baku');
       $this->load->model('model_kategori');
@@ -172,8 +185,6 @@ alert('There are no fields to generate a report');
       $this->load->view('penyedia-list',$data);
       $this->load->view('footer');
     }
-
->>>>>>> fff691549e73b8fc8521d6ef871085595f276357
-
+ 
 }
 ?>

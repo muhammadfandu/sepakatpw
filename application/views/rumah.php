@@ -46,6 +46,7 @@
           <div class="col-xs-5">
             <div class="company-desc pull-right">
                 <span><i class="fa fa-fw fa-map-marker"></i><?= $a['kota'] .", ". $a['provinsi'];?></span><br>
+                <span>Rating: <?php echo $a['rating'];?></span>
                 <!--<span class="label label-primary">Butuh Cepat</span>-->
             </div>
           </div>

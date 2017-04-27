@@ -41,15 +41,15 @@
         <h2 style="margin-top:0;font-weight: 200;"><?= $nama;?></h2>
         <span style="color:#b0b0b0;"><?= $a['kategori'];?></span>&nbsp;<span class="label-primary"> Menghasilkan: <?= $a['barang_bahan'];?></span>
       </div>
-<<<<<<< HEAD
-      <div class="col-md-2">
-         <h3><span style="color:#b0b0b0;"></span>  <span class="label-primary">Rating: <?php if (isset($as)) {  echo $as; } else{ echo"0.0";};?></span></h3>
-=======
-      <div class="col-md-2 text-center">
-        <!-- <span>2 jam yang lalu</span> -->
->>>>>>> fff691549e73b8fc8521d6ef871085595f276357
+      <form method="POST">
+           <div class="col-md-2">
+         <h3><span style="color:#b0b0b0;"></span>  <span class="label-primary">Rating: <?php if (isset($as)) {  echo $as;
+         echo "<input type='hidden' name='rates' value='$as'>";  } else{ echo"0.0";
+echo '<input type="hidden" name="rates" value="0.0">';
+         };?></span></h3>
+         
       </div>
-    </div>
+      </form>
     <div class="row company-itembody">
       <div class="col-md-12" align="justify">
         <?= substr($a['deskripsi'],0,400);?>...

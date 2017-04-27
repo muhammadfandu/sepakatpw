@@ -201,7 +201,6 @@ Class Model_manufaktur extends CI_Model {
     $this->db->where($where);
     $this->db->update('manufaktur',$data);
   }
-<<<<<<< HEAD
 public function kategori()
   {
    $query = $this->db->get('kategori');
@@ -224,9 +223,10 @@ public function kategori()
       $result = $query->row();
       return $result;
     }
-=======
+    function update_rate($id, $data){
 
->>>>>>> fff691549e73b8fc8521d6ef871085595f276357
+    $this->db->where('id_manufaktur', $id)->update('manufaktur', $data); 
+}
 }
 
 ?>

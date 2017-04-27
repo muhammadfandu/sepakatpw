@@ -96,7 +96,12 @@ error_reporting(0);
         </div>
         <form method="POST">
         <div class="col-md-2">
-         <h3><span style="color:#b0b0b0;"></span>  <span class="label-primary">Rating: <?php if (isset($as)) {  echo $as; } else{ echo"0.0";};?></span></h3>
+         <h3><span style="color:#b0b0b0;"></span>  <span class="label-primary">Rating: <?php
+         if ($a['rating'] == 0) {
+           echo"0.0";
+         }
+         else{
+          echo $a['rating'];  }?></span></h3>
           <input type="hidden" name="idne" value="<?= $a['id_manufaktur'];?>">
       </div>
       </form>

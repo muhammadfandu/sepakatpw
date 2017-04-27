@@ -256,7 +256,6 @@ function tambahbahan($data1){
                ->set($data)
                ->update($table);
     }
-<<<<<<< HEAD
     function update_bahan($where,$data){
     $this->db->where($where);
     $this->db->update('bahan_baku',$data);
@@ -284,8 +283,9 @@ function tambahbahan($data1){
       $result = $query->row();
       return $result;
     }
-=======
->>>>>>> fff691549e73b8fc8521d6ef871085595f276357
-}
+    function update_rate($id, $data){
 
+    $this->db->where('id_bahan_baku', $id)->update('bahan_baku', $data); 
+}
+}
 ?>
