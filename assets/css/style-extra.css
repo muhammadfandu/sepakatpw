@@ -136,6 +136,11 @@ hr{
   padding: 4px;
   border-radius: 5px;
 }
+.label-success{
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+}
 .container {
     padding-top: 2%;
     padding-bottom: 2%;

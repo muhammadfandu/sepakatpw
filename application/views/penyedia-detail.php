@@ -7,7 +7,7 @@
     $nama     = $a['nama'];
     $email    = $a['email'];
     $kategori = $a['kategori'];
-    $gamlat   = $a['gambar_latar'];   
+    $gamlat   = $a['gambar_latar'];
   }
 
 
@@ -39,15 +39,15 @@
       </div>
       <div class="col-md-9">
         <h2 style="margin-top:0;font-weight: 200;"><?= $nama;?></h2>
-        <span style="color:#b0b0b0;"><?= $a['kategori'];?></span>&nbsp;<span class="label-primary"> Menghasilkan: <?= $a['barang_bahan'];?></span>
+        <span style="color:#b0b0b0;"><?= $a['kategori'];?></span>&nbsp;<span class="label-primary"> Menghasilkan: <?= $a['barang_bahan'];?></span>&nbsp;<span class="label-success"><b>Rp. <?= $a['harga'];?> / Kg</b></span>
       </div>
-<<<<<<< HEAD
+
       <div class="col-md-2">
          <h3><span style="color:#b0b0b0;"></span>  <span class="label-primary">Rating: <?php if (isset($as)) {  echo $as; } else{ echo"0.0";};?></span></h3>
-=======
+
       <div class="col-md-2 text-center">
         <!-- <span>2 jam yang lalu</span> -->
->>>>>>> fff691549e73b8fc8521d6ef871085595f276357
+
       </div>
     </div>
     <div class="row company-itembody">
@@ -61,7 +61,7 @@
           <span><i class="fa fa-fw fa-map-marker"></i> <?= $a['provinsi'];?>, <?=$a['kota'];?></span><br>
         </div>
         <div class="col-md-4">
-          <span><i class="fa fa-fw fa-cubes"></i> <?= $a['total_produksi'];?>Kg / Bulan <b><?= $a['harga'];?></b></span>
+          <span><i class="fa fa-fw fa-cubes"></i> <?= $a['total_produksi'];?>Kg / Bulan</span>
         </div>
         <div class="col-md-4">
           <span><i class="fa fa-fw fa-exchange"></i><?= $a['tipe'];?></span>
@@ -77,6 +77,7 @@
         </div>
       </div>
     </div>
+    </div>
     <div class="row company-action">
       <div class="col-md-4 pull-left">
         <h4 style="margin-top:20px;">Bagikan di
@@ -87,7 +88,7 @@
         </h4>
       </div>
 <div class="col-md-4 pull-left">
-       
+
 <h3 style="margin-top:20px;">Berikan Rating
 <form action="<?php echo base_url(); ?>Bahan_baku/rating" method="POST">
        <span>
@@ -175,14 +176,14 @@
   </div>
 </div>
  <script>
-function displayResult(rating){ 
- document.getElementById("valsta").value=rating; 
+function displayResult(rating){
+ document.getElementById("valsta").value=rating;
 }
                         $(document).ready(function () {
                             $("#demo3 .stars").click(function () {
 
                                 var label = $("label[for='" + $(this).attr('id') + "']");
-                                
+
                                 $("#feedback").text(label.attr('title'));
                                 $(this).attr("checked");
                             });
